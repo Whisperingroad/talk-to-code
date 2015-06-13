@@ -386,7 +386,7 @@ public class ASTCreator {
 	
 	public String findConditionalValue(Sentence s)
 	{
-		if(s.find("greater"))
+		if(s.find("greater") || s.find("more"))
 			return ">";
 		else if(s.find("smaller")||s.find("less"))
 			return "<";
@@ -394,9 +394,9 @@ public class ASTCreator {
 			return "==";
 		else if(s.findPhrase("not equal"))
 			return "!=";
-		else if(s.findPhrase("greater than or equal"))
+		else if(s.findPhrase("greater than or equal") || s.findPhrase("more than or equal"))
 			return ">=";
-		else if(s.findPhrase("smaller than or equal"))
+		else if(s.findPhrase("smaller than or equal") || s.findPhrase("less than or equal"))
 			return "<=";
 		else
 			return null;
