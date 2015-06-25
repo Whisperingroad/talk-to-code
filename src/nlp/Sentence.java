@@ -73,7 +73,10 @@ public class Sentence {
 		return null;
 		
 	}
-	
+	// @param the first variable in an if statement
+	// @param the POS tag that we are interested in
+	// @return the string that corresponds to the provided
+	// POS tag. In this case, it should be the second variable
 	public String findWord1InRelation(String w, String name)
 	{
 		for(GrammarRelation r:relations)

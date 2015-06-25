@@ -326,6 +326,9 @@ public class ASTCreator {
 		consoleLogger.log("Value 1 is "+s.words.get(1).word);
 		ASTIfNode ifNode = new ASTIfNode(parent);
 		ASTConditionNode c = new ASTConditionNode(ifNode);
+		// Finding the first variable
+		// Assume that statement starts with "if x is ..."
+		// Therefore, x will be the second word in the sentence
 		c.value1 = s.words.get(1).word;
 		c.value2 = findSecondValue(s, c.value1);
 		c.operand = findConditionalValue(s);
@@ -368,7 +371,12 @@ public class ASTCreator {
 		}
 		return ifNode;
 	}
-	
+	// Finding the second variable in the sentence
+	// This method uses the full sentence and the first variable
+	// to find the second variable by determining its corresponding 
+	// POS tag
+	// @param s is the full sentence provided by the user
+	// @param is the first variable	
 	public String findSecondValue(Sentence s, String v)
 	{
 		String r = s.findWord1InRelation(v, "nsubj");
@@ -390,7 +398,7 @@ public class ASTCreator {
 			return ">";
 		else if(s.find("smaller")||s.find("less"))
 			return "<";
-		else if(s.find("equals"))
+		else if(s.find("equal"))
 			return "==";
 		else if(s.findPhrase("not equal"))
 			return "!=";
