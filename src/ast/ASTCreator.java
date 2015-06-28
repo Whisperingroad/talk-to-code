@@ -377,7 +377,7 @@ public class ASTCreator {
 	// POS tag
 	// @param s is the full sentence provided by the user
 	// @param is the first variable	
-	public String findSecondValue(Sentence s, String v)
+	/** public String findSecondValue(Sentence s, String v)
 	{
 		String r = s.findWord1InRelation(v, "nsubj");
 		if(r==null)
@@ -390,18 +390,35 @@ public class ASTCreator {
 			consoleLogger.log("Value 2 is "+r);
 			return r;
 		}
-	}
+	} **/
 	
+	
+	 public String findSecondValue(Sentence s, String v)
+	{
+		String r = s.findSecondVariableInIfRelation(v, "nsubj");
+		if(r==null)
+		{
+			consoleLogger.log("No second value could be found for value 1, returning null");
+			return null;
+		}
+		else
+		{
+			consoleLogger.log("Value 2 is "+r);
+			return r;
+		}
+	} 
+	
+		
 	public String findConditionalValue(Sentence s)
 	{
-		if(s.find("greater") || s.find("more"))
+		if(s.find("greater") || s.find("more") || s.find("bigger"))
 			return ">";
 		else if(s.find("smaller")||s.find("less"))
 			return "<";
-		else if(s.find("equal"))
-			return "==";
 		else if(s.findPhrase("not equal"))
 			return "!=";
+		else if(s.find("equal"))
+			return "==";
 		else if(s.findPhrase("greater than or equal") || s.findPhrase("more than or equal"))
 			return ">=";
 		else if(s.findPhrase("smaller than or equal") || s.findPhrase("less than or equal"))

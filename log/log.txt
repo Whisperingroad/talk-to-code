@@ -1,24 +1,21 @@
 [Sentence]	if X is less than 20 
 Value 1 is X
-Value 2 is X
+Value 2 is 20
 [Sentence]	if X is more than 20 
 Value 1 is X
-Value 2 is X
+Value 2 is 20
 [Sentence]	if X is equal to 20 
 Value 1 is X
-Value 2 is X
-[Sentence]	if X is smaller than 10 
-Value 1 is X
-Value 2 is X
+Value 2 is 20
 [Sentence]	if X is greater than 10 
 Value 1 is X
-Value 2 is X
+Value 2 is 10
+[Sentence]	if X is bigger than 10 
+Value 1 is X
+Value 2 is 10
+[Sentence]	if X is smaller than 10 
+Value 1 is X
+Value 2 is 10
 [Sentence]	if X is not equal to 10 
 Value 1 is X
-Value 2 is X
-[Sentence]	if X is greater than or equal to 30 
-Value 1 is X
-Value 2 is X
-[Sentence]	if X is smaller than or equal to 30 
-Value 1 is X
-Value 2 is X
+Value 2 is 10

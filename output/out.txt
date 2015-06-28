@@ -1,6 +1,18 @@
 void main()
 {
-	if(X>10)
+	if(X<20)
+{
+}	if(X>20)
+{
+}	if(X==20)
+{
+}	if(X>10)
+{
+}	if(X>10)
+{
+}	if(X<10)
+{
+}	if(X!=10)
 {
 }
 	return;

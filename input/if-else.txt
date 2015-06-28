@@ -1,8 +1,7 @@
 if X is less than 20
 if X is more than 20
 if X is equal to 20
-if X is smaller than 10
 if X is greater than 10
+if X is bigger than 10
+if X is smaller than 10
 if X is not equal to 10
-if X is greater than or equal to 30
-if X is smaller than or equal to 30

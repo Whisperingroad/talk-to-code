@@ -1,5 +1,10 @@
 package nlp;
 
+/**
+ * Every pair of words share a grammar relation
+ *
+ */
+
 public class GrammarRelation {
 	public Word word1;
 	public Word word2;
@@ -15,11 +20,18 @@ public class GrammarRelation {
 	public boolean hasWord1(String w1, String name)
 	{
 		if(w1.toLowerCase().equals(word1.word.toLowerCase()))
+		{
+			String temp = name;
+			String temprelation = relation;
 			if(name.equals(relation))
+			{
 				return true;
+			}
+		}
 		return false;
 	}
-	
+	// @param the first variable in an if statement
+	// @param the POS tag that we are interested in
 	public boolean hasWord2(String w2, String name)
 	{
 		if(w2.toLowerCase().equals(word2.word.toLowerCase()))

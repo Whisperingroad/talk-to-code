@@ -17,3 +17,7 @@ Create a double variable named X with a value of 2
 Create a character variable named X with a value of 2
 Create a variable named X with a value of 2
 Create a variable with a value of 2
+
+
+
+

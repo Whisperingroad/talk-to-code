@@ -60,11 +60,15 @@ public class Sentence {
 		}
 		return null;
 	}
+
+	
 	
 	public String findWord2InRelation(String w, String name)
 	{
 		for(GrammarRelation r: relations)
 		{
+			String check = r.word2.word;
+			String check1 = r.word1.word;
 			if(r.hasWord1(w, name))
 			{
 				return r.word2.word;
@@ -73,21 +77,68 @@ public class Sentence {
 		return null;
 		
 	}
-	// @param the first variable in an if statement
-	// @param the POS tag that we are interested in
+	// @param w: the first variable in an if statement
+	// @param name: the POS tag that we are interested in
 	// @return the string that corresponds to the provided
 	// POS tag. In this case, it should be the second variable
 	public String findWord1InRelation(String w, String name)
 	{
+		//looping through every grammar relation from a single sentence
 		for(GrammarRelation r:relations)
 		{
+			// if a particular grammar relation contains the word w,
+			// and owns the desired POS tag
+			// the other word of this grammar relation should be the one
+			// that we are looking for.
 			if(r.hasWord2(w, name))
 			{
 				return r.word1.word;
+				
 			}
 		}
 		return null;
 	}
+	
+	public String findSecondVariableInIfRelation(String w, String tag)
+	{
+		for(GrammarRelation r:relations)
+		{
+
+			if(r.hasWord2(w, tag))
+			{
+				
+				String check = r.word2.word;
+				String checkgram = r.word2.gramClass;
+				String check1 = r.word1.word;
+				String checkgram1 = r.word1.gramClass;		
+				//Word1 in the Grammar relation pair is either a Cardinal Number, a singular proper noun, or a plural proper noun
+				if (r.word1.gramClass.equals("CD") || r.word1.gramClass.equals("NN")|| r.word1.gramClass.equals("NNP") || r.word1.gramClass.equals("NNPS"))
+				{
+					return r.word1.word;
+				}
+				//Word1 in the Grammar relation pair is either an adjective or a comparative adjective
+				//this implies that word1 is not the second value in the if statement
+				//word1 is most likely an "equal"
+				else if (r.word1.gramClass.equals("JJ") || r.word1.gramClass.equals("JJR"))
+				{
+					String temp = r.word1.word;
+					//for comparisons with to statements
+					// equal to
+					String secondValue = findWord2InRelation(temp, "nmod:to");
+					if (secondValue == null)
+					{
+						//for comparisons with than statements
+						//less than
+						secondValue = findWord2InRelation(temp, "nmod:than");
+					}
+					return secondValue;				
+				}
+				
+			}
+		}
+		return null;
+	}
+	
 	
 	public String print()
 	{
