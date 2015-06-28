@@ -60,23 +60,33 @@ public class Sentence {
 		}
 		return null;
 	}
-
-	
 	
 	public String findWord2InRelation(String w, String name)
 	{
 		for(GrammarRelation r: relations)
 		{
-			String check = r.word2.word;
-			String check1 = r.word1.word;
 			if(r.hasWord1(w, name))
 			{
 				return r.word2.word;
 			}
 		}
 		return null;
-		
 	}
+	
+	public String findVariableInIfCondition(String word, String relationTag)
+	{
+		for(GrammarRelation r: relations)
+		{
+			String check = r.word2.word;
+			String check1 = r.word1.word;
+			if(r.hasWord1(word, relationTag) && (r.word2.gramClass.equals("CD") || r.word2.gramClass.equals("NN")|| r.word2.gramClass.equals("NNP") || r.word2.gramClass.equals("NNPS")))
+			{
+				return r.word2.word;
+			}
+		}
+		return null;
+	}
+	
 	// @param w: the first variable in an if statement
 	// @param name: the POS tag that we are interested in
 	// @return the string that corresponds to the provided
@@ -87,7 +97,7 @@ public class Sentence {
 		for(GrammarRelation r:relations)
 		{
 			// if a particular grammar relation contains the word w,
-			// and owns the desired POS tag
+			// and owns the desired relation tag
 			// the other word of this grammar relation should be the one
 			// that we are looking for.
 			if(r.hasWord2(w, name))
@@ -99,39 +109,47 @@ public class Sentence {
 		return null;
 	}
 	
-	public String findSecondVariableInIfRelation(String w, String tag)
+	// to determine the number of Coordination
+	// conjunctions in a given if-else statement
+	public int determineConjunctionInIfCondition()
+	{
+		int numberOfConjunctions = 0;
+		for(GrammarRelation r: relations)
+		{
+			if(r.equals("CC"))
+			{
+				numberOfConjunctions++;
+			}
+		}
+		return numberOfConjunctions;
+	}
+	
+	
+	public String findNextVariableInIfCondition(String w, String relationTag)
 	{
 		for(GrammarRelation r:relations)
 		{
 
-			if(r.hasWord2(w, tag))
+			if(r.hasWord2(w, relationTag))
 			{
-				
+				// for debugging purposes
 				String check = r.word2.word;
 				String checkgram = r.word2.gramClass;
 				String check1 = r.word1.word;
 				String checkgram1 = r.word1.gramClass;		
-				//Word1 in the Grammar relation pair is either a Cardinal Number, a singular proper noun, or a plural proper noun
+				// Word1 in the Grammar relation pair is either a Cardinal Number, a singular proper noun, or a plural proper noun
 				if (r.word1.gramClass.equals("CD") || r.word1.gramClass.equals("NN")|| r.word1.gramClass.equals("NNP") || r.word1.gramClass.equals("NNPS"))
 				{
 					return r.word1.word;
 				}
-				//Word1 in the Grammar relation pair is either an adjective or a comparative adjective
-				//this implies that word1 is not the second value in the if statement
-				//word1 is most likely an "equal"
+				// Word1 in the Grammar relation pair is either an adjective or a comparative adjective
+				// this implies that word1 is not the second value in the if statement
+				// word1 is most likely an "equal"
 				else if (r.word1.gramClass.equals("JJ") || r.word1.gramClass.equals("JJR"))
 				{
 					String temp = r.word1.word;
-					//for comparisons with to statements
-					// equal to
-					String secondValue = findWord2InRelation(temp, "nmod:to");
-					if (secondValue == null)
-					{
-						//for comparisons with than statements
-						//less than
-						secondValue = findWord2InRelation(temp, "nmod:than");
-					}
-					return secondValue;				
+					String nextVariable = findVariableInIfCondition(temp, "nmod");
+					return nextVariable;				
 				}
 				
 			}

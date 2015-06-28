@@ -330,7 +330,8 @@ public class ASTCreator {
 		// Assume that statement starts with "if x is ..."
 		// Therefore, x will be the second word in the sentence
 		c.value1 = s.words.get(1).word;
-		c.value2 = findSecondValue(s, c.value1);
+		//c.value2 = findSecondValue(s, c.value1);
+		c.value2 = findNextValue(s, c.value1);
 		c.operand = findConditionalValue(s);
 		ifNode.conditions.add(c);
 		
@@ -377,7 +378,7 @@ public class ASTCreator {
 	// POS tag
 	// @param s is the full sentence provided by the user
 	// @param is the first variable	
-	/** public String findSecondValue(Sentence s, String v)
+	 public String findSecondValue(Sentence s, String v)
 	{
 		String r = s.findWord1InRelation(v, "nsubj");
 		if(r==null)
@@ -390,12 +391,11 @@ public class ASTCreator {
 			consoleLogger.log("Value 2 is "+r);
 			return r;
 		}
-	} **/
+	} 
 	
-	
-	 public String findSecondValue(Sentence s, String v)
+	 public String findNextValue(Sentence s, String v)
 	{
-		String r = s.findSecondVariableInIfRelation(v, "nsubj");
+		String r = s.findNextVariableInIfCondition(v, "nsubj");
 		if(r==null)
 		{
 			consoleLogger.log("No second value could be found for value 1, returning null");

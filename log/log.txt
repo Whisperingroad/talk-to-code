@@ -1,3 +1,6 @@
+[Sentence]	if x is less than or equal to 10 
+Value 1 is x
+No second value could be found for value 1, returning null
 [Sentence]	if X is less than 20 
 Value 1 is X
 Value 2 is 20

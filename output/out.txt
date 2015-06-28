@@ -1,6 +1,8 @@
 void main()
 {
-	if(X<20)
+	if(x<null)
+{
+}	if(X<20)
 {
 }	if(X>20)
 {

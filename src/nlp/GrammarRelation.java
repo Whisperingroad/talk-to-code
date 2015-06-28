@@ -23,10 +23,12 @@ public class GrammarRelation {
 		{
 			String temp = name;
 			String temprelation = relation;
-			if(name.equals(relation))
+			//to include both nmod:to and nmod:than relations
+			if(relation.contains(name))
 			{
 				return true;
 			}
+			
 		}
 		return false;
 	}
