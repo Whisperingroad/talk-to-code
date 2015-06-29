@@ -73,15 +73,25 @@ public class Sentence {
 		return null;
 	}
 	
-	public String findVariableInIfCondition(String word, String relationTag)
+	public String findVariableInIfCondition(String word1, String word2,String relationTag)
 	{
 		for(GrammarRelation r: relations)
 		{
 			String check = r.word2.word;
 			String check1 = r.word1.word;
-			if(r.hasWord1(word, relationTag) && (r.word2.gramClass.equals("CD") || r.word2.gramClass.equals("NN")|| r.word2.gramClass.equals("NNP") || r.word2.gramClass.equals("NNPS")))
+			if (word2 == null)
 			{
-				return r.word2.word;
+				if(r.hasWord1(word1, relationTag) && (r.word2.gramClass.equals("CD") || r.word2.gramClass.equals("NN")|| r.word2.gramClass.equals("NNP") || r.word2.gramClass.equals("NNPS")))
+				{
+					return r.word2.word;
+				}
+			}
+			if (word1 == null)
+			{
+				if(r.hasWord2(word2, relationTag) && (r.word1.gramClass.equals("CD") || r.word1.gramClass.equals("NN")|| r.word1.gramClass.equals("NNP") || r.word1.gramClass.equals("NNPS")))
+				{
+					return r.word1.word;
+				}
 			}
 		}
 		return null;
@@ -111,26 +121,38 @@ public class Sentence {
 	
 	// to determine the number of Coordination
 	// conjunctions in a given if-else statement
-	public int determineConjunctionInIfCondition()
+	public int determineCoordinatingConjunctionsInIfCondition()
 	{
-		int numberOfConjunctions = 0;
+		int numberOfCCs = 0;
 		for(GrammarRelation r: relations)
 		{
-			if(r.equals("CC"))
+			String relationTag = "conj";
+			if(r.relation.contains(relationTag))
 			{
-				numberOfConjunctions++;
+				numberOfCCs++;
 			}
 		}
-		return numberOfConjunctions;
+		return numberOfCCs;
 	}
 	
-	
-	public String findNextVariableInIfCondition(String w, String relationTag)
+	public String findNextVariableInIfCondition(String w)
 	{
+		int numberOfCCs = determineCoordinatingConjunctionsInIfCondition();
+		String nextVariable = null;
 		for(GrammarRelation r:relations)
 		{
-
-			if(r.hasWord2(w, relationTag))
+			if (numberOfCCs != 0)
+			{
+				if(r.relation.contains("conj"))
+				{
+					String temp = r.word2.word;
+					nextVariable = findVariableInIfCondition(temp, null, "nmod");
+					numberOfCCs--;
+					return nextVariable;
+				}
+			}
+			// for straightforward if-else conditions
+			else if(r.hasWord2(w, "nsubj") && numberOfCCs == 0)
 			{
 				// for debugging purposes
 				String check = r.word2.word;
@@ -148,7 +170,7 @@ public class Sentence {
 				else if (r.word1.gramClass.equals("JJ") || r.word1.gramClass.equals("JJR"))
 				{
 					String temp = r.word1.word;
-					String nextVariable = findVariableInIfCondition(temp, "nmod");
+				    nextVariable = findVariableInIfCondition(temp, null, "nmod");
 					return nextVariable;				
 				}
 				
@@ -156,6 +178,8 @@ public class Sentence {
 		}
 		return null;
 	}
+	
+	
 	
 	
 	public String print()

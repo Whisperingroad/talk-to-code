@@ -23,6 +23,7 @@ public class GrammarRelation {
 		{
 			String temp = name;
 			String temprelation = relation;
+			//change to contains
 			//to include both nmod:to and nmod:than relations
 			if(relation.contains(name))
 			{
@@ -37,8 +38,16 @@ public class GrammarRelation {
 	public boolean hasWord2(String w2, String name)
 	{
 		if(w2.toLowerCase().equals(word2.word.toLowerCase()))
-			if(name.equals(relation))
+		{
+			String temp = name;
+			String temprelation = relation;
+			//change to contains
+			//to include both nmod:to and nmod:than relations
+			if(relation.contains(name))
+			{
 				return true;
+			}
+		}
 		return false;
 	}
 	

@@ -1,6 +1,10 @@
 void main()
 {
-	if(x<null)
+	if(x>null)
+{
+}	if(X!=10)
+{
+}	if(x<=10)
 {
 }	if(X<20)
 {
@@ -13,8 +17,6 @@ void main()
 }	if(X>10)
 {
 }	if(X<10)
-{
-}	if(X!=10)
 {
 }
 	return;

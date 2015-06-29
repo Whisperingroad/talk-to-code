@@ -323,17 +323,39 @@ public class ASTCreator {
 	
 	public ASTIfNode findCondition(Sentence s, ASTNode parent)
 	{
+		// Logging all relations between words
+		consoleLogger.log("Relations ");
+		for (GrammarRelation rel : s.relations) 
+		{
+			consoleLogger.log(rel.toString());
+		}
+		consoleLogger.log("\n");
+		
+		// Logging all POS tags of words
+		consoleLogger.log("POS tags of words");
+		for (Word word : s.words)
+		{
+			
+			consoleLogger.log(word.toString());
+		}
+		consoleLogger.log("\n");
+		
+		
 		consoleLogger.log("Value 1 is "+s.words.get(1).word);
 		ASTIfNode ifNode = new ASTIfNode(parent);
 		ASTConditionNode c = new ASTConditionNode(ifNode);
+		int numberOfCCs = s.determineCoordinatingConjunctionsInIfCondition();
 		// Finding the first variable
 		// Assume that statement starts with "if x is ..."
 		// Therefore, x will be the second word in the sentence
+		// TODO: replace this hack with the word2 of the first encountered nsubj
 		c.value1 = s.words.get(1).word;
 		//c.value2 = findSecondValue(s, c.value1);
 		c.value2 = findNextValue(s, c.value1);
-		c.operand = findConditionalValue(s);
-		ifNode.conditions.add(c);
+		//TODO: replace this hack with an nlp function
+	    c.operand = findConditionalValue(s);
+	    ifNode.conditions.add(c);
+	
 		
 		if(s.find("print"))
 		{
@@ -392,10 +414,10 @@ public class ASTCreator {
 			return r;
 		}
 	} 
-	
+	 
 	 public String findNextValue(Sentence s, String v)
 	{
-		String r = s.findNextVariableInIfCondition(v, "nsubj");
+		String r = s.findNextVariableInIfCondition(v);
 		if(r==null)
 		{
 			consoleLogger.log("No second value could be found for value 1, returning null");
@@ -411,7 +433,11 @@ public class ASTCreator {
 		
 	public String findConditionalValue(Sentence s)
 	{
-		if(s.find("greater") || s.find("more") || s.find("bigger"))
+	    if(s.findPhrase("greater than or equal") || s.findPhrase("more than or equal"))
+			return ">=";
+		else if(s.findPhrase("smaller than or equal") || s.findPhrase("less than or equal"))
+			return "<=";
+		else if(s.find("greater") || s.find("more") || s.find("bigger"))
 			return ">";
 		else if(s.find("smaller")||s.find("less"))
 			return "<";
@@ -419,10 +445,6 @@ public class ASTCreator {
 			return "!=";
 		else if(s.find("equal"))
 			return "==";
-		else if(s.findPhrase("greater than or equal") || s.findPhrase("more than or equal"))
-			return ">=";
-		else if(s.findPhrase("smaller than or equal") || s.findPhrase("less than or equal"))
-			return "<=";
 		else
 			return null;
 			
