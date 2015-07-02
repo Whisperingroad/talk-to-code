@@ -350,7 +350,6 @@ public class ASTCreator {
 		// Therefore, x will be the second word in the sentence
 		// TODO: replace this hack with the word2 of the first encountered nsubj
 		c.value1 = s.words.get(1).word;
-		//c.value2 = findSecondValue(s, c.value1);
 		c.value2 = findNextValue(s, c.value1);
 		//TODO: replace this hack with an nlp function
 	    c.operand = findConditionalValue(s);
@@ -411,6 +410,20 @@ public class ASTCreator {
 		else
 		{
 			consoleLogger.log("Value 2 is "+r);
+			return r;
+		}
+	} 
+	 public String findFirstValue(Sentence s, String v)
+	{
+		String r = s.findWord1InRelation(v, "nsubj");
+		if(r==null)
+		{
+			consoleLogger.log("No first value could be found for value 1, returning null");
+			return null;
+		}
+		else
+		{
+			consoleLogger.log("Value 1 is "+r);
 			return r;
 		}
 	} 

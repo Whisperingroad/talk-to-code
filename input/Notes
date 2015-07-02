@@ -19,3 +19,48 @@ if X is greater than 10
 if X is bigger than 10
 if X is smaller than 10
 if X is not equal to 10
+
+
+
+case 1 - for eg x is smaller, bigger, equal, not equal
+case 2 - for eg x is greater, more, less
+
+
+Step 1 -- finding main subject
+
+word2 of the first relation with nsubj will be the main subject
+word1 of the first nsubj may be the second value (case 2) // store second value
+however, more of than not, it will be an adjective (case 1) //store condition
+
+Step 1i -- Checking if main subject is just a number describing the actual main subject, eg. 5x
+Just look for nummod relation
+
+an if condition will always start with a noun, if this noun is a cardinal number, I should check if it is describing another subject, for instance, 5 x
+if it is, join them together, otherwise just treat the subject as it is
+
+Step 2 -- Looking for condition
+
+once a subject is found, look for a condition, aka adjectives
+if an nsubj relation is found and the main subject is word2 and word1 is an adjective, word1 is a condition (case 1) // store condition
+if word1 is another noun, it is a second subject
+in this event, the condition will be word2 of an advmod relation, with word1 being the second subject  (case 2) // store second subject
+
+In order to verify if a given condition is associated with a subject
+for case 1, look out for advmod relations, word1 second subject, word2 condition
+for case 2, look out for nmod:than and nmod:to, word1 condition, word2 second subject
+
+
+if X is smaller than 10
+if 5 x is less than 10 and more than 20
+if x is less than 10 and more than 20
+if x is greater than 10 and smaller than y
+if x is greater than 10 and smaller than 20
+if x is greater than 10 and x is smaller than 20
+if X is not equal to 10
+if x is less than or equal to 10
+if X is less than 20
+if X is more than 20
+if X is equal to 20
+if X is greater than 10
+if X is bigger than 10
+if X is smaller than 10
