@@ -1,1 +1,14 @@
+if X is greater than 10
+if X is less than 20
+if X is more than 20
 if X is smaller than 10
+if X is not equal to 10
+if X is equal to 20
+if X is bigger than 10
+if X is smaller than 10
+if x is less than or equal to 10
+if x is greater than or equal to 10
+if peter is bigger than or equal to tom
+if mass_A is greater than or equal to mass_B
+if number1 is less than or equal to number2
+if integer1 is not equal to integer2

@@ -320,6 +320,47 @@ public class ASTCreator {
 	//
 	//Start:Condition Functions
 	//
+	public ASTIfNode constructConditionStatement(Sentence s, ASTNode parent)
+	{
+		// Logging all relations between words
+		consoleLogger.log("Relations ");
+		for (GrammarRelation rel : s.relations) 
+		{
+			consoleLogger.log(rel.toString());
+		}
+		consoleLogger.log("\n");
+		
+		//consoleLogger.log("Value 1 is "+s.words.get(1).word);
+		ASTIfNode ifNode = new ASTIfNode(parent);
+		ASTConditionNode c = new ASTConditionNode(ifNode);
+		
+		int sentenceIndex = 0;
+		int firstIndex = 0;
+		int secondIndex = 0;
+		int grammarIndex = 0;
+		String mainValue = null;
+		String secondValue = null;
+		String condition = null;
+		String identifier = null;
+		
+		// finding the main subject
+		mainValue = s.findFirstValue(grammarIndex);
+		// position in full sentence
+		firstIndex = s.fullSentence.indexOf(mainValue);
+		c.conditionStatement.add(mainValue);
+		
+		// finding the second subject
+		secondValue = s.findNextVariableInCondition(mainValue,grammarIndex);
+		// position in full sentence
+		secondIndex = s.fullSentence.indexOf(secondValue);
+		
+		// finding condition
+		
+		
+		
+		return ifNode;
+	
+	}
 	
 	public ASTIfNode findCondition(Sentence s, ASTNode parent)
 	{
@@ -331,14 +372,13 @@ public class ASTCreator {
 		}
 		consoleLogger.log("\n");
 		
-		// Logging all POS tags of words
+		/** Logging all POS tags of words
 		consoleLogger.log("POS tags of words");
 		for (Word word : s.words)
 		{
-			
 			consoleLogger.log(word.toString());
 		}
-		consoleLogger.log("\n");
+		consoleLogger.log("\n"); **/
 		
 		
 		consoleLogger.log("Value 1 is "+s.words.get(1).word);
@@ -350,9 +390,12 @@ public class ASTCreator {
 		// Therefore, x will be the second word in the sentence
 		// TODO: replace this hack with the word2 of the first encountered nsubj
 		c.value1 = s.words.get(1).word;
+		c.conditionStatement.add(c.value1);
+		c.operand = findConditionalValue(s);
+		c.conditionStatement.add(c.operand);
 		c.value2 = findNextValue(s, c.value1);
-		//TODO: replace this hack with an nlp function
-	    c.operand = findConditionalValue(s);
+		//c.value2 = findSecondValue(s, c.value1);
+		c.conditionStatement.add(c.value2);
 	    ifNode.conditions.add(c);
 	
 		
@@ -410,20 +453,6 @@ public class ASTCreator {
 		else
 		{
 			consoleLogger.log("Value 2 is "+r);
-			return r;
-		}
-	} 
-	 public String findFirstValue(Sentence s, String v)
-	{
-		String r = s.findWord1InRelation(v, "nsubj");
-		if(r==null)
-		{
-			consoleLogger.log("No first value could be found for value 1, returning null");
-			return null;
-		}
-		else
-		{
-			consoleLogger.log("Value 1 is "+r);
 			return r;
 		}
 	} 

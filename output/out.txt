@@ -1,6 +1,32 @@
 void main()
 {
-	if(X<10)
+	if( X > 10)
+{
+}	if( X < 20)
+{
+}	if( X > 20)
+{
+}	if( X < smaller)
+{
+}	if( X != equal)
+{
+}	if( X == equal)
+{
+}	if( X > bigger)
+{
+}	if( X < smaller)
+{
+}	if( x <= less)
+{
+}	if( x >= greater)
+{
+}	if( peter > bigger)
+{
+}	if( mass_A >= greater)
+{
+}	if( number1 <= less)
+{
+}	if( integer1 != equal)
 {
 }
 	return;

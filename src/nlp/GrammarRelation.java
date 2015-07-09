@@ -17,6 +17,15 @@ public class GrammarRelation {
 		relation = r;
 	}
 	
+	public boolean findMainSubject(String identifier)
+	{
+		if(relation.contains(identifier))
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean hasWord1(String w1, String name)
 	{
 		if(w1.toLowerCase().equals(word1.word.toLowerCase()))

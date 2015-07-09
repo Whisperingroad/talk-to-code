@@ -1,10 +1,13 @@
 package ast;
 
+import java.util.ArrayList;
+
 public class ASTConditionNode extends ASTNode{
 
 	String value1;
 	String operand;
 	String value2;
+	ArrayList<String> conditionStatement;
 	
 	ASTConditionNode(ASTNode p)
 	{
@@ -12,6 +15,8 @@ public class ASTConditionNode extends ASTNode{
 		value1="";
 		operand="";
 		value2="";
+		conditionStatement = new ArrayList<String>();
+		
 	}
 	
 	ASTConditionNode(String v1, String o, String v2)
@@ -21,8 +26,18 @@ public class ASTConditionNode extends ASTNode{
 		value2 = v2;
 	}
 	
+	//public String print()
+	//{
+		//return value1+operand+value2;
+	//}
+	
 	public String print()
 	{
-		return value1+operand+value2;
+		String statement = "";
+		for (String partOfStatement : conditionStatement)
+		{
+			statement = statement + " " + partOfStatement;
+		}
+		return statement;
 	}
 }

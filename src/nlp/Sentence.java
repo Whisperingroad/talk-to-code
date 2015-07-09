@@ -73,6 +73,102 @@ public class Sentence {
 		return null;
 	}
 	
+	// @param w: the first variable in an if statement
+	// @param name: the POS tag that we are interested in
+	// @return the string that corresponds to the provided
+	// POS tag. In this case, it should be the second variable
+	public String findWord1InRelation(String w, String name)
+	{
+		//looping through every grammar relation from a single sentence
+		for(GrammarRelation r:relations)
+		{
+			// if a particular grammar relation contains the word w,
+			// and owns the desired relation tag
+			// the other word of this grammar relation should be the one
+			// that we are looking for.
+			if(r.hasWord2(w, name))
+			{
+				return r.word1.word;
+				
+			}
+		}
+		return null;
+	}
+	
+	// Word2 of the first Grammar relation with "nsubj" as an identifier
+	// is the first noun/number in the sentence
+	// This is usually the first value in the condition statement
+	// index keeps track of the Grammar relations that are accessed
+	public String findFirstValue(int index)
+	{
+		for(int i = 0; i < relations.size(); i++ )
+		{
+			GrammarRelation relation = relations.get(i);
+			if(relation.findMainSubject("nsubj"))
+			{
+				index = i;
+				return relation.word2.word;
+			}
+		}
+		return null;
+	}
+	
+	
+	// to determine the number of Coordinating
+	// conjunctions in a given if-else statement
+	// @return the number of coordinating conjunctions
+	// in a given sentence.
+	// E.g of coordination conjunctions: "and" and "or"
+	public int determineCoordinatingConjunctionsInIfCondition()
+	{
+		int numberOfCCs = 0;
+		for(GrammarRelation r: relations)
+		{
+			String relationTag = "conj";
+			if(r.relation.contains(relationTag))
+			{
+				numberOfCCs++;
+			}
+		}
+		return numberOfCCs;
+	}
+	
+	public String findNextVariableInCondition(String value , int index)
+	{
+		String nextVariable = null;
+		for (int i = index; i < relations.size(); i++)
+		{
+			GrammarRelation relation = relations.get(i);
+			if (relation.hasWord2(value,"nsubj"))
+			{
+				if (relation.word1.gramClass.equals("CD") || relation.word1.gramClass.equals("NN")|| relation.word1.gramClass.equals("NNP") || relation.word1.gramClass.equals("NNPS"))
+				{
+					return relation.word1.word;
+				}
+				// Word1 in the Grammar relation pair is either an adjective or a comparative adjective
+				// this implies that word1 is not the second value in the if statement
+				// word1 is most likely an "equal"
+				else if (relation.word1.gramClass.equals("JJ") || relation.word1.gramClass.equals("JJR"))
+				{
+					String temp = relation.word1.word;
+				    nextVariable = findVariableInIfCondition(temp, null, "nmod");
+					return nextVariable;				
+				}
+			}
+		}
+		
+		return nextVariable;
+		
+	}
+	
+	// @param: a word, either word1 or word2, and a relation tag.
+	// if word1 is provided, word2 should be null and vice versa
+	// @result: if word1 is provided, the corresponding word2 which shares
+	// the same relation tag will be provided.
+	// The function will only return word1 or word2 if their Parts of Speech tag corresponds to
+	// what is shown below.
+	// As these POS tags corresponds to numbers, singular and plural nouns,
+	// it ensures that the words that are returned are variables/values in the condition statement
 	public String findVariableInIfCondition(String word1, String word2,String relationTag)
 	{
 		for(GrammarRelation r: relations)
@@ -97,54 +193,24 @@ public class Sentence {
 		return null;
 	}
 	
-	// @param w: the first variable in an if statement
-	// @param name: the POS tag that we are interested in
-	// @return the string that corresponds to the provided
-	// POS tag. In this case, it should be the second variable
-	public String findWord1InRelation(String w, String name)
-	{
-		//looping through every grammar relation from a single sentence
-		for(GrammarRelation r:relations)
-		{
-			// if a particular grammar relation contains the word w,
-			// and owns the desired relation tag
-			// the other word of this grammar relation should be the one
-			// that we are looking for.
-			if(r.hasWord2(w, name))
-			{
-				return r.word1.word;
-				
-			}
-		}
-		return null;
-	}
 	
-	// to determine the number of Coordination
-	// conjunctions in a given if-else statement
-	public int determineCoordinatingConjunctionsInIfCondition()
-	{
-		int numberOfCCs = 0;
-		for(GrammarRelation r: relations)
-		{
-			String relationTag = "conj";
-			if(r.relation.contains(relationTag))
-			{
-				numberOfCCs++;
-			}
-		}
-		return numberOfCCs;
-	}
-	
+	// @param the first variable/value in the condition statement
+	// @result the second variable/value that is compared with the first variable
+	// in the condition statement
 	public String findNextVariableInIfCondition(String w)
 	{
+		// first, check the number of ands/ors in the sentence
 		int numberOfCCs = determineCoordinatingConjunctionsInIfCondition();
 		String nextVariable = null;
 		for(GrammarRelation r:relations)
 		{
 			if (numberOfCCs != 0)
 			{
+				// two conditions in a phrase,
+				// e.g greater than or equal to
 				if(r.relation.contains("conj"))
 				{
+					// store the latter condition
 					String temp = r.word2.word;
 					nextVariable = findVariableInIfCondition(temp, null, "nmod");
 					numberOfCCs--;
@@ -165,10 +231,11 @@ public class Sentence {
 					return r.word1.word;
 				}
 				// Word1 in the Grammar relation pair is either an adjective or a comparative adjective
-				// this implies that word1 is not the second value in the if statement
+				// this implies that the word1 found is not the second value but a condition
 				// word1 is most likely an "equal"
 				else if (r.word1.gramClass.equals("JJ") || r.word1.gramClass.equals("JJR"))
 				{
+					// store the condition
 					String temp = r.word1.word;
 				    nextVariable = findVariableInIfCondition(temp, null, "nmod");
 					return nextVariable;				
@@ -179,7 +246,13 @@ public class Sentence {
 		return null;
 	}
 	
-	
+	public String findConditionInSentence(int indexOfFirstValue, int indexOfSecondValue)
+	{
+		String s = null;
+		
+		return s;
+		
+	}
 	
 	
 	public String print()

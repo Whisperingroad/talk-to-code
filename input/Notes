@@ -20,6 +20,7 @@ if X is bigger than 10
 if X is smaller than 10
 if X is not equal to 10
 
+//just need to find subject
 
 
 case 1 - for eg x is smaller, bigger, equal, not equal
@@ -28,7 +29,7 @@ case 2 - for eg x is greater, more, less
 
 Step 1 -- finding main subject
 
-word2 of the first relation with nsubj will be the main subject
+word2 of the first relation with nsubj will be the main subject //done
 word1 of the first nsubj may be the second value (case 2) // store second value
 however, more of than not, it will be an adjective (case 1) //store condition
 
@@ -51,11 +52,6 @@ for case 2, look out for nmod:than and nmod:to, word1 condition, word2 second su
 
 
 if X is smaller than 10
-if 5 x is less than 10 and more than 20
-if x is less than 10 and more than 20
-if x is greater than 10 and smaller than y
-if x is greater than 10 and smaller than 20
-if x is greater than 10 and x is smaller than 20
 if X is not equal to 10
 if x is less than or equal to 10
 if X is less than 20
@@ -64,3 +60,9 @@ if X is equal to 20
 if X is greater than 10
 if X is bigger than 10
 if X is smaller than 10
+if 5 x is less than 10 and more than 20
+if x is less than 10 and more than 20
+if x is greater than 10 and smaller than y
+if x is greater than 10 and smaller than 20
+if x is greater than 10 and x is smaller than 20
+
