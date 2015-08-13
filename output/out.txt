@@ -6,27 +6,27 @@ void main()
 {
 }	if( X > 20)
 {
-}	if( X < smaller)
+}	if( X < 10)
 {
-}	if( X != equal)
+}	if( X != 10)
 {
-}	if( X == equal)
+}	if( X == 20)
 {
-}	if( X > bigger)
+}	if( X > 10)
 {
-}	if( X < smaller)
+}	if( X < 10)
 {
-}	if( x <= less)
+}	if( x <= 10)
 {
-}	if( x >= greater)
+}	if( x >= 10)
 {
-}	if( peter > bigger)
+}	if( peter > tom)
 {
-}	if( mass_A >= greater)
+}	if( mass_A >= mass_B)
 {
-}	if( number1 <= less)
+}	if( number1 <= number2)
 {
-}	if( integer1 != equal)
+}	if( integer1 != integer2)
 {
 }
 	return;
