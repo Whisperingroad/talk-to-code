@@ -370,7 +370,7 @@ public class ASTCreator {
 		{
 			consoleLogger.log(rel.toString());
 		}
-		consoleLogger.log("\n");
+		//consoleLogger.log("\n");
 		
 		/** Logging all POS tags of words
 		consoleLogger.log("POS tags of words");
@@ -381,7 +381,7 @@ public class ASTCreator {
 		consoleLogger.log("\n"); **/
 		
 		
-		consoleLogger.log("Value 1 is "+s.words.get(1).word);
+		consoleLogger.log("Subject 1 is "+s.words.get(1).word);
 		ASTIfNode ifNode = new ASTIfNode(parent);
 		ASTConditionNode c = new ASTConditionNode(ifNode);
 		int numberOfCCs = s.determineCoordinatingConjunctionsInIfCondition();
@@ -452,7 +452,7 @@ public class ASTCreator {
 		}
 		else
 		{
-			consoleLogger.log("Value 2 is "+r);
+			consoleLogger.log("value 2 is "+r);
 			return r;
 		}
 	} 
@@ -467,7 +467,8 @@ public class ASTCreator {
 		}
 		else
 		{
-			consoleLogger.log("Value 2 is "+r);
+			consoleLogger.log("Subject 2 is "+r);
+			consoleLogger.log("\n");
 			return r;
 		}
 	} 

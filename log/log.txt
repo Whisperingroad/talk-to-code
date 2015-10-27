@@ -5,10 +5,10 @@ Relations
 10(CD) with is(VBZ) has relation cop
 10(CD) with greater(JJR) has relation advmod
 10(CD) with than(IN) has relation advmod
+Subject 1 is X
+Subject 2 is 10
 
 
-Value 1 is X
-Value 2 is 10
 [Sentence]	if X is less than 20 
 Relations 
 20(CD) with if(IN) has relation mark
@@ -16,10 +16,10 @@ Relations
 20(CD) with is(VBZ) has relation cop
 20(CD) with less(JJR) has relation advmod
 less(JJR) with than(IN) has relation mwe
+Subject 1 is X
+Subject 2 is 20
 
 
-Value 1 is X
-Value 2 is 20
 [Sentence]	if X is more than 20 
 Relations 
 20(CD) with if(IN) has relation mark
@@ -27,10 +27,10 @@ Relations
 20(CD) with is(VBZ) has relation cop
 20(CD) with more(JJR) has relation advmod
 more(JJR) with than(IN) has relation mwe
+Subject 1 is X
+Subject 2 is 20
 
 
-Value 1 is X
-Value 2 is 20
 [Sentence]	if X is smaller than 10 
 Relations 
 smaller(JJR) with if(IN) has relation mark
@@ -38,10 +38,10 @@ smaller(JJR) with X(NN) has relation nsubj
 smaller(JJR) with is(VBZ) has relation cop
 10(CD) with than(IN) has relation case
 smaller(JJR) with 10(CD) has relation nmod:than
+Subject 1 is X
+Subject 2 is 10
 
 
-Value 1 is X
-Value 2 is 10
 [Sentence]	if X is not equal to 10 
 Relations 
 equal(JJ) with if(IN) has relation mark
@@ -50,10 +50,10 @@ equal(JJ) with is(VBZ) has relation cop
 equal(JJ) with not(RB) has relation neg
 10(CD) with to(TO) has relation case
 equal(JJ) with 10(CD) has relation nmod:to
+Subject 1 is X
+Subject 2 is 10
 
 
-Value 1 is X
-Value 2 is 10
 [Sentence]	if X is equal to 20 
 Relations 
 equal(JJ) with if(IN) has relation mark
@@ -61,10 +61,10 @@ equal(JJ) with X(NN) has relation nsubj
 equal(JJ) with is(VBZ) has relation cop
 20(CD) with to(TO) has relation case
 equal(JJ) with 20(CD) has relation nmod:to
+Subject 1 is X
+Subject 2 is 20
 
 
-Value 1 is X
-Value 2 is 20
 [Sentence]	if X is bigger than 10 
 Relations 
 bigger(JJR) with if(IN) has relation mark
@@ -72,10 +72,10 @@ bigger(JJR) with X(NN) has relation nsubj
 bigger(JJR) with is(VBZ) has relation cop
 10(CD) with than(IN) has relation case
 bigger(JJR) with 10(CD) has relation nmod:than
+Subject 1 is X
+Subject 2 is 10
 
 
-Value 1 is X
-Value 2 is 10
 [Sentence]	if X is smaller than 10 
 Relations 
 smaller(JJR) with if(IN) has relation mark
@@ -83,10 +83,10 @@ smaller(JJR) with X(NN) has relation nsubj
 smaller(JJR) with is(VBZ) has relation cop
 10(CD) with than(IN) has relation case
 smaller(JJR) with 10(CD) has relation nmod:than
+Subject 1 is X
+Subject 2 is 10
 
 
-Value 1 is X
-Value 2 is 10
 [Sentence]	if x is less than or equal to 10 
 Relations 
 less(JJR) with if(IN) has relation mark
@@ -98,10 +98,10 @@ less(JJR) with or(CC) has relation cc
 less(JJR) with equal(JJ) has relation conj:or
 10(CD) with to(TO) has relation case
 equal(JJ) with 10(CD) has relation nmod:to
+Subject 1 is x
+Subject 2 is 10
 
 
-Value 1 is x
-Value 2 is 10
 [Sentence]	if x is greater than or equal to 10 
 Relations 
 greater(JJR) with if(IN) has relation mark
@@ -113,10 +113,10 @@ greater(JJR) with or(CC) has relation cc
 greater(JJR) with equal(JJ) has relation conj:or
 10(CD) with to(TO) has relation case
 equal(JJ) with 10(CD) has relation nmod:to
+Subject 1 is x
+Subject 2 is 10
 
 
-Value 1 is x
-Value 2 is 10
 [Sentence]	if peter is bigger than or equal to tom 
 Relations 
 bigger(JJR) with if(IN) has relation mark
@@ -128,10 +128,10 @@ bigger(JJR) with or(CC) has relation cc
 bigger(JJR) with equal(JJ) has relation conj:or
 tom(NN) with to(TO) has relation case
 equal(JJ) with tom(NN) has relation nmod:to
+Subject 1 is peter
+Subject 2 is tom
 
 
-Value 1 is peter
-Value 2 is tom
 [Sentence]	if mass_A is greater than or equal to mass_B 
 Relations 
 greater(JJR) with if(IN) has relation mark
@@ -143,10 +143,10 @@ greater(JJR) with or(CC) has relation cc
 greater(JJR) with equal(JJ) has relation conj:or
 mass_B(NN) with to(TO) has relation case
 equal(JJ) with mass_B(NN) has relation nmod:to
+Subject 1 is mass_A
+Subject 2 is mass_B
 
 
-Value 1 is mass_A
-Value 2 is mass_B
 [Sentence]	if number1 is less than or equal to number2 
 Relations 
 less(JJR) with if(IN) has relation mark
@@ -158,10 +158,10 @@ less(JJR) with or(CC) has relation cc
 less(JJR) with equal(JJ) has relation conj:or
 number2(NN) with to(TO) has relation case
 equal(JJ) with number2(NN) has relation nmod:to
+Subject 1 is number1
+Subject 2 is number2
 
 
-Value 1 is number1
-Value 2 is number2
 [Sentence]	if integer1 is not equal to integer2 
 Relations 
 equal(JJ) with if(IN) has relation mark
@@ -170,7 +170,7 @@ equal(JJ) with is(VBZ) has relation cop
 equal(JJ) with not(RB) has relation neg
 integer2(NN) with to(TO) has relation case
 equal(JJ) with integer2(NN) has relation nmod:to
+Subject 1 is integer1
+Subject 2 is integer2
 
 
-Value 1 is integer1
-Value 2 is integer2
